@@ -25,16 +25,29 @@ The whole project is written in C++ language and uses such libraries as:
 The integrated development environment(IDE) used was Visual Studio Code.
 
 ## Features
-
+- The program uses the string and iomanip libraries for easier operation and modification
+- A vector was used as a container for storing Player class objects
+- Enum enumeration type to create more readable and understandable code,
+- The sort function from the algorithm library using lambda was used to sort the objects in the container
+- Used polymorphism, abstract class and virtual functions to facilitate extensibility and enable movement across different boards,
+- Encapsulation is used to prevent private information from leaking out
+- Const-correctness and unsigned short types are used to prevent unwanted changes and reduce memory usage
+- References were used, and also references to constants when possible, to avoid creating unnecessary copies
+- Getter and setter functions have been created to return and set private class data
+- Used a constructor with an initialization list to improve performance and readability
 
 ## Project Status
 Project is: _in progress_.
 
 ## Room for Improvement
-The project is one of the first and gave me a lot of fun, but it needs some improvements:
-- creating a separate class for the computer at different levels, polymorphism can be used here,
-- use of const-correctness
-- simplifying the code and improving the names of variables and functions
+This project taught me a lot, such as how to use references and use functions, but at this stage I have a lot of improvements that improve its functioning:
+- dynamic creation of objects using new and delete operators or smart pointers from the memory library
+- changes in the functions of the board class and making greater use of the polymorphism used
+- breaking down two functions from system.cpp into smaller and more detailed ones
+
+Project extension:
+- introduction of a mode for two people
+- introducing the possibility of playing against the computer
 
 ## Contact
 Created by lukaszwieczorek1998@gmail.com - feel free to contact me!
