@@ -47,7 +47,7 @@ This project taught me a lot, such as how to use references and use functions, b
 - changes in the functions of the board class and making greater use of the polymorphism used
 - breaking down two functions from system.cpp into smaller and more detailed ones
 
-Project extension:
+Project upcoming extension:
 - introduction of a mode for two people
 - introducing the possibility of playing against the computer
 
