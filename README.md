@@ -1,5 +1,5 @@
 # Casino_Cpp
-> A casino game for 3-5 people, involving betting a selected amount on one of several betting options so that it matches the generated number. Here it is not luck that counts, but money management.
+> A casino game for 3-5 people, involving betting a selected amount on one of several betting options so that it matches the generated number. Here it is not luck that counts, but money management!
 
 ## General Information
 The project allows 3-5 players to play, players give their names and decide with what amount they start the game. Once the game starts, a number 1-10 is drawn and players are presented with several choices:
