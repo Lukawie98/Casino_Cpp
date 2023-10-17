@@ -17,26 +17,26 @@ This project aimed to better understand object-oriented programming, use its adv
 
 ## Technologies Used
 The whole project is written in C++ language and uses such libraries as:
-- vector
-- string
-- iostream
-- unistd.h
-- iomanip
-- algorithm
+- vector,
+- string,
+- iostream,
+- unistd.h,
+- iomanip,
+- algorithm.
 
 The integrated development environment(IDE) used was Visual Studio Code.
 
 ## Features
-- The program uses the string and iomanip libraries for easier operation and modification
-- A vector was used as a container for storing Player class objects
+- The program uses the string and iomanip libraries for easier operation and modification,
+- A vector was used as a container for storing Player class objects,
 - Enum enumeration type to create more readable and understandable code,
-- The sort function from the algorithm library using lambda was used to sort the objects in the container
+- The sort function from the algorithm library using lambda was used to sort the objects in the container,
 - Used polymorphism, abstract class and virtual functions to facilitate extensibility and enable movement across different boards,
-- Encapsulation is used to prevent private information from leaking out
-- Const-correctness and unsigned short types are used to prevent unwanted changes and reduce memory usage
-- References were used, and also references to constants when possible, to avoid creating unnecessary copies
-- Getter and setter functions have been created to return and set private class data
-- Used a constructor with an initialization list to improve performance and readability
+- Encapsulation is used to prevent private information from leaking out,
+- Const-correctness and unsigned short types are used to prevent unwanted changes and reduce memory usage,
+- References were used, and also references to constants when possible, to avoid creating unnecessary copies,
+- Getter and setter functions have been created to return and set private class data,
+- Used a constructor with an initialization list to improve performance and readability.
 
 ## Project Status
 Project is: _in progress_.
