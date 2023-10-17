@@ -22,6 +22,7 @@ The whole project is written in C++ language and uses such libraries as:
 - iostream
 - unistd.h
 - iomanip
+- algorithm
 
 The integrated development environment(IDE) used was Visual Studio Code.
 
