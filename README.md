@@ -31,7 +31,7 @@ The integrated development environment(IDE) used was Visual Studio Code.
 - A vector was used as a container for storing Player class objects,
 - Enum enumeration type to create more readable and understandable code,
 - The sort function from the algorithm library using lambda was used to sort the objects in the container,
-- Used polymorphism, abstract class and virtual functions to facilitate extensibility and enable movement across different boards,
+- Used polymorphism, abstract class and virtual functions to facilitate extensibility and enable movement on different boards for different numbers of players,
 - Encapsulation is used to prevent private information from leaking out,
 - Const-correctness and unsigned short types are used to prevent unwanted changes and reduce memory usage,
 - References were used, and also references to constants when possible, to avoid creating unnecessary copies,
@@ -43,13 +43,14 @@ Project is: _in progress_.
 
 ## Room for Improvement
 This project taught me a lot, such as how to use references and use functions, but at this stage I have a lot of improvements that improve its functioning:
-- dynamic creation of objects using new and delete operators or smart pointers from the memory library
-- changes in the functions of the board class and making greater use of the polymorphism used
-- breaking down two functions from system.cpp into smaller and more detailed ones
+- dynamic creation of objects using new and delete operators or smart pointers from the memory library,
+- changes in the functions of the board class and making greater use of the polymorphism used,
+- breaking down two functions from system.cpp into smaller and more detailed ones.
 
 Project upcoming extension:
-- introduction of a mode for two people
-- introducing the possibility of playing against the computer
+- creating an introductory board with a welcome and game description, loaded from another file, using the fstream library,
+- introduction of a mode for two people,
+- introducing the possibility of playing against the computer.
 
 ## Contact
 Created by lukaszwieczorek1998@gmail.com - feel free to contact me!
