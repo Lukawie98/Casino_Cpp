@@ -10,6 +10,7 @@ The project allows 3-5 players to play, players give their names and decide with
 - Number is more than 3, the bet amount is multiplied x7,
 - Number is more than 5, the bet amount is multiplied x5,
 - Number is more than 7, the bet amount is multiplied x2.
+  
 If the option chosen by the player does not match the drawn number, he loses the entire amount he bet. The game lasts for the number of rounds determined by the players at the beginning.
 
 This project aimed to better understand object-oriented programming, use its advantages of encapsulation and polymorphism, use getters, setters, const-corretness, following SOLID principles and correct patterns
