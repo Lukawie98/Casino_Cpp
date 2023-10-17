@@ -3,6 +3,7 @@
 #include "../PlayerHandler/player.hpp"
 #include <vector>
 #include <unistd.h>
+#include <algorithm>
 
 class System 
 {
@@ -43,4 +44,5 @@ public:
     void enterGoldenNumb();                                     //sets golden number in first option of bet
     void displayOfWinnings(Player & ply, int converter);        //displays player winning
     void displayBoard(std::vector<Player> & ply, char amountPlayers);   //displays the board for the selected number of players
+    void finalSorting(std::vector<Player> & players);                   //Sorting players on the last step based on their final account balance
 };

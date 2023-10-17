@@ -57,22 +57,18 @@ void System::selectionNumOfPlayers()
             {
                 handlingPlayers(3);
                 displayBoard(players_, getNumOfPlayers());
-                selectionBalanceSystem();
-               
                 break;
             }
             case '4':
             {
                 handlingPlayers(4);
                 displayBoard(players_, getNumOfPlayers());
-                selectionBalanceSystem();
                 break;
             }
             case '5':
             {
                 handlingPlayers(5);
                 displayBoard(players_, getNumOfPlayers());
-                selectionBalanceSystem();
                 break;
             }
             case '0':
@@ -89,6 +85,7 @@ void System::selectionNumOfPlayers()
                 break;
             }
         }
+        selectionBalanceSystem();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
@@ -103,7 +100,6 @@ char System::getNumOfPlayers()
 void System::selectionAccBalance()
 {
     char choiceAmount;
-    
     std::cin >> choiceAmount;
     
     switch(choiceAmount)
@@ -114,8 +110,6 @@ void System::selectionAccBalance()
                 {
                     player.setAccBalance(500);
                 }
-                
-                playingSetNumbOfTurns();
                 break;
             }
         case '2':
@@ -124,10 +118,7 @@ void System::selectionAccBalance()
                 {
                     player.setAccBalance(1000);
                 }
-                
-                playingSetNumbOfTurns();
                 break;
-                
             }     
         case '3':
             {
@@ -135,7 +126,6 @@ void System::selectionAccBalance()
                 {
                     player.setAccBalance(2000);
                 }
-                playingSetNumbOfTurns();
                 break;
             }
         case '4':
@@ -144,7 +134,6 @@ void System::selectionAccBalance()
                 {
                     player.setAccBalance(5000);
                 }
-                playingSetNumbOfTurns();
                 break;
             }
         default:
@@ -155,7 +144,7 @@ void System::selectionAccBalance()
                 break;
             }
     }
-
+    playingSetNumbOfTurns();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,9 +156,7 @@ void System::selectionBalanceSystem()
          Menu m1;
          m1.displayBalanceSelection();
          selectionAccBalance();
-         
     }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -530,6 +517,7 @@ void System::checkingWinner()
     std::cout << "The BIG WINNER IS: \n";
     p.show();
     std::cout <<"\n ********************\n\n";
+    finalSorting(players_);
     displayRanking();
     
     std::cout << "Press 'enter' to exit! \n";
@@ -585,4 +573,12 @@ void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
             } 
         }
         brd -> showBoard(ply);
+}
+
+void System::finalSorting(std::vector<Player> & players)
+{    
+    std::sort(players.begin(), players.end(), [](Player player1, Player player2)
+        {
+            return player1.getAccBalance() > player2.getAccBalance();
+        });
 }
