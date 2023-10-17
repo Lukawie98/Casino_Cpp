@@ -4,12 +4,12 @@
 ## General Information
 The project allows 3-5 players to play, players give their names and decide with what amount they start the game. Once the game starts, a number 1-10 is drawn and players are presented with several choices:
 - Golden Bet, the player states the number he thinks has been drawn, when he hits his wagered amount is multiplied x10,
-- Less than 7, the bet amount is multiplied x2,
-- Less than 5, the bet amount is multiplied x5,
-- Less than 3, the amount bet is multiplied x7,
-- More than 3, the bet amount is multiplied x7,
-- More than 5, the bet amount is multiplied x5,
-- More than 7, the bet amount is multiplied x2.
+- Number is less than 7, the bet amount is multiplied x2,
+- Number is less than 5, the bet amount is multiplied x5,
+- Number is less than 3, the amount bet is multiplied x7,
+- Number is more than 3, the bet amount is multiplied x7,
+- Number is more than 5, the bet amount is multiplied x5,
+- Number is more than 7, the bet amount is multiplied x2.
 If the option chosen by the player does not match the drawn number, he loses the entire amount he bet. The game lasts for the number of rounds determined by the players at the beginning.
 
 This project aimed to better understand object-oriented programming, use its advantages of encapsulation and polymorphism, use getters, setters, const-corretness, following SOLID principles and correct patterns
