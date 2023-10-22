@@ -1,4 +1,4 @@
-#include "../BoardManagment/boardThree.hpp"
+#include "boardThree.hpp"
 
 void BoardThree::showBoard(std::vector<Player> & p)
 {

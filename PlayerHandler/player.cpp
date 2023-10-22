@@ -1,4 +1,4 @@
-#include "../PlayerHandler/player.hpp"
+#include "player.hpp"
 
 Player::Player(
         std::string name,

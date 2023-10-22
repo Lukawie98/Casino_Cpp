@@ -1,4 +1,4 @@
-#include "../GameHandler/menu.hpp"
+#include "menu.hpp"
 #include <iostream>
 
 void Menu::displayBalanceSelection() const

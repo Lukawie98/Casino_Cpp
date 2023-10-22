@@ -1,9 +1,11 @@
-#include "../GameHandler/system.hpp"
-#include "../GameHandler/menu.hpp"
+#include "system.hpp"
+#include "menu.hpp"
 #include "../BoardManagment/boardThree.hpp"
 #include "../BoardManagment/boardFour.hpp"
 #include "../BoardManagment/boardFive.hpp"
 
+#include <unistd.h>
+#include <algorithm>
 
 void System::addPlayer(const Player & p)
 {
@@ -43,6 +45,7 @@ void System::handlingPlayers(int numOfPlayers)
         Player ply{"Noone", 0};
         addPlayer(ply);
     }
+    system("cls");
     addingPlayersNames();
 }
 
@@ -552,18 +555,21 @@ void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
             {
                  BoardThree b3;
                  brd = &b3;
+                 brd -> showBoard(ply);
                  break;
             }
             case '4':
             {
                 BoardFour b4;
                 brd = &b4;
+                brd -> showBoard(ply);
                 break;
             }
             case '5':
             {
                  BoardFive b5;
                  brd = &b5;
+                 brd -> showBoard(ply);
                  break;
             }
             default:
@@ -572,7 +578,6 @@ void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
                 break;
             } 
         }
-        brd -> showBoard(ply);
 }
 
 void System::finalSorting(std::vector<Player> & players)

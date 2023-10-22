@@ -1,4 +1,4 @@
-#include "../BoardManagment/board.hpp"
+#include "board.hpp"
 
 class BoardThree :public Board
 {

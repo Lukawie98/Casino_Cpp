@@ -1,4 +1,4 @@
-#include "../BoardManagment/boardFive.hpp"
+#include "boardFive.hpp"
 
 void BoardFive::longerName(int fP0, int fP2)
 {
