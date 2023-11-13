@@ -28,7 +28,7 @@ void System::displayRanking()
 
 void System::addingPlayersNames()
 {
-    for(int i = 0; i <= players_.size()-1; i++)
+    for(int i = 0; i < players_.size(); i++)
     {
         std::cout << "Enter name for player " << i+1 << ": ";
         players_[i].setName();
@@ -399,13 +399,11 @@ void System::playersDisplayOfWinnings()
             {
                 displayOfWinnings(player, 2);
                 break;
-                
             }
             case 3:
             {
                 displayOfWinnings(player, 5);
-                break;
-                
+                break;          
             }
             case 4:
             {
@@ -416,19 +414,16 @@ void System::playersDisplayOfWinnings()
             {
                 displayOfWinnings(player, 2);
                 break;
-                
             }
             case 6:
             {
                 displayOfWinnings(player, 5);  
                 break;
-                
             }
             case 7:
             {
                 displayOfWinnings(player, 7);
                 break;
-                
             }
             case 0:
             {
@@ -455,7 +450,6 @@ void System::displayBetweenRounds(int t)
         playersDisplayOfWinnings();
         getchar();
         system("cls");
-        
     }
 }
 
@@ -506,21 +500,14 @@ void System::setRandomNumber()
 ///////////////////////////////////////////////////////////////////////
 
 void System::checkingWinner()
-{       
-    Player p {"Noone", 0};
-    p = players_[0];
-    
-    for(int i = 0; i < players_.size(); i++)
-    {
-        if(p.getAccBalance() < players_[i].getAccBalance())
-        {
-            p = players_[i];
-        }
-    }
-    std::cout << "The BIG WINNER IS: \n";
-    p.show();
-    std::cout <<"\n ********************\n\n";
+{   
+    //sort the ranking by Acc balance    
     finalSorting(players_);
+
+    std::cout << "The BIG WINNER IS: \n";
+    players_[0].show();
+    std::cout <<"\n********************\n\n";
+    
     displayRanking();
     
     std::cout << "Press 'enter' to exit! \n";
