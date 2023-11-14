@@ -5,7 +5,7 @@
 
 class Player
 {
-    std::string name_ {0};          //player name
+    std::string name_ {""};          //player name
     int accBalance_{0};    //player's account balance
     unsigned int betNumber_ {0};             //number, which the player bets that it fell out
     int betAmount_ {0};             //the amount the player is betting
@@ -13,9 +13,9 @@ class Player
     unsigned int optionSwitch_ {0};          //An artificial variable that stores relevant information about what option the player bet on and whether he hit, if not it is 0
 
 public:
-    Player(std::string name,
+    Player(const std::string & name,
            int accBalance);
-            
+    
     void setName();                     //sets the player's name
     void displayName() const;                 //displays the player's name
     void setAccBalance(int accBalance); //sets the player's account balance

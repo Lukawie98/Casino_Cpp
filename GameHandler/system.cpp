@@ -7,13 +7,6 @@
 #include <unistd.h>
 #include <algorithm>
 
-void System::addPlayer(const Player & p)
-{
-    players_.push_back(p);
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-
 void System::displayRanking()
 {
     std::cout<<"The ranking is: \n";
@@ -26,27 +19,19 @@ void System::displayRanking()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
-void System::addingPlayersNames()
-{
-    for(int i = 0; i < players_.size(); i++)
-    {
-        std::cout << "Enter name for player " << i+1 << ": ";
-        players_[i].setName();
-    }
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-
 void System::handlingPlayers(int numOfPlayers)
 {
+    players_.reserve(numOfPlayers);
+
     for(int i = 0; i < numOfPlayers; i++)
     {
-        //adding the right number of players to the container
-        Player ply{"Noone", 0};
-        addPlayer(ply);
+        std::string playerName{""};
+        std::cout << "Enter name for player " << i+1 << ": ";
+        std::cin >> playerName;
+
+        players_.emplace_back(playerName, 0);
     }
     system("cls");
-    addingPlayersNames();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -83,7 +68,7 @@ void System::selectionNumOfPlayers()
             {
                 system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
-                getchar(); getchar();
+                std::cin.get();
                 system("cls");
                 break;
             }
@@ -143,7 +128,7 @@ void System::selectionAccBalance()
             {
                 system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
-                getchar(); getchar();
+                std::cin.get();
                 break;
             }
     }
@@ -178,7 +163,7 @@ void System::runMenu()
 
 void System::enterGoldenNumb()
 {
-     std::cout << "Write the number: ";
+     std::cout << "\nWrite the number: ";
      std::cin >> betNumber_;
      
      while(betNumber_ < 1 || betNumber_ > 10)
@@ -307,16 +292,13 @@ void System::choicePlayersBetOption()
             
             selectingOptionsToBetOn(player.getBetOption() , player);
             
-            system("cls");
-            displayBoard(players_, getNumOfPlayers());
-            player.displayName();
             std::cout << "\nEnter the amount you want to bet ";
             player.setBetAmount();
         }
         else
         {
             std::cout << "\nSorry, your account balance is 0!\nPress anything to move on\n";
-            getchar();
+            std::cin.get();
         }
     }
 }
@@ -379,7 +361,7 @@ void System::convertingBettingAmount()
 void System::displayOfWinnings(Player & ply, int converter)
 {
     ply.displayName();
-    std::cout<<" - Your winnings are: "<<ply.getBetAmount()*converter << std::endl;
+    std::cout<<" - Your winnings are: "<< ply.getBetAmount()*converter << "\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -442,13 +424,13 @@ void System::displayBetweenRounds(int t)
     {
         convertingBettingAmount();
         system("cls");
-        std::cout <<"The Number is: "<< getRandNumb() << std::endl;
-        
-        getchar();getchar();
+        std::cout <<"The Number is: "<< getRandNumb() << "\n";
+        std::cin.get();
+        std::cin.get(); 
         system("cls");
         
         playersDisplayOfWinnings();
-        getchar();
+        std::cin.get();
         system("cls");
     }
 }
@@ -458,10 +440,7 @@ void System::displayBetweenRounds(int t)
 void System::playingSetNumbOfTurns()
 {
     int turns;
-    system("cls");
-    
-    displayBoard(players_, getNumOfPlayers());
-    std::cout <<"Write how many turns do you want to play(1-10):\n";
+    std::cout <<"\nWrite how many turns do you want to play(1-10):\n";
     std::cin >> turns; 
     
     while(turns < 1 || turns > 10)
@@ -501,9 +480,8 @@ void System::setRandomNumber()
 
 void System::checkingWinner()
 {   
-    //sort the ranking by Acc balance    
+    //sort the ranking of winners    
     finalSorting(players_);
-
     std::cout << "The BIG WINNER IS: \n";
     players_[0].show();
     std::cout <<"\n********************\n\n";
@@ -511,7 +489,7 @@ void System::checkingWinner()
     displayRanking();
     
     std::cout << "Press 'enter' to exit! \n";
-    getchar();
+    std::cin.get();
     exit(0);
 }
 
@@ -569,7 +547,7 @@ void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
 
 void System::finalSorting(std::vector<Player> & players)
 {    
-    std::sort(players.begin(), players.end(), [](Player player1, Player player2)
+    std::sort(players.begin(), players.end(), [](const Player & player1, const Player & player2)
         {
             return player1.getAccBalance() > player2.getAccBalance();
         });

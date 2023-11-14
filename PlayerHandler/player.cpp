@@ -1,7 +1,7 @@
 #include "player.hpp"
 
 Player::Player(
-        std::string name,
+        const std::string & name,
         int accBalance)
     : name_(name)               
     , accBalance_(accBalance)

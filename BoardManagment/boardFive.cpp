@@ -58,5 +58,5 @@ void BoardFive::showBoard(std::vector<Player> & p)
     p[2].show();
     std::cout << std::setw(leftSpace.length() + line.length() - (nameLength2 + balanceLength2));
     p[4].show();
-    std::cout <<"\n";
+    std::cout <<"\n\n\n";
 }
