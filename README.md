@@ -22,6 +22,7 @@ The whole project is written in C++ language and uses such libraries as:
 - iostream,
 - unistd.h,
 - iomanip,
+- random,
 - algorithm.
 
 The integrated development environment(IDE) used was Visual Studio Code.
@@ -45,7 +46,9 @@ Project is: _in progress_.
 This project taught me a lot, such as how to use references and use functions, but at this stage I have a lot of improvements that improve its functioning:
 - dynamic creation of objects using new and delete operators or smart pointers from the memory library,
 - changes in the functions of the board class and making greater use of the polymorphism used,
-- breaking down two functions from system.cpp into smaller and more detailed ones.
+- breaking down two functions from system.cpp into smaller and more detailed ones,
+- add unit tests,
+- create a separate class for player management.
 
 Project upcoming extension:
 - creating an introductory board with a welcome and game description, loaded from another file, using the fstream library,
