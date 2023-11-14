@@ -30,7 +30,6 @@ public:
     void setRandomNumber();                    //sets the random number
     int getRandNumb();                         //gets the random number
     void choicePlayersBetOption();             //A feature in which all players take turns selecting betting options
-    void convertingBettingAmount();            //recalculates the bet amount according to the option
     void playingSetNumbOfTurns();              //sets the number of rounds how many players will play
     void displayBetweenRounds(int t);          //wyswietla zaktualizowane wygrane graczy, generuje nowa losowa liczbe 
     void selectingOptionsToBetOn(char betOpt, Player & player); //selects the option the player decides on and checks if he has guessed

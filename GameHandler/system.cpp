@@ -32,7 +32,7 @@ void System::handlingPlayers(int numOfPlayers)
 
         players_.emplace_back(playerName, 0);
     }
-    system("cls");
+    //system("cls");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -67,10 +67,10 @@ void System::selectionNumOfPlayers()
             }
             default:
             {
-                system("cls");
+               // system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
                 std::cin.get();
-                system("cls");
+               // system("cls");
                 break;
             }
         }
@@ -127,7 +127,7 @@ void System::selectionAccBalance()
             }
         default:
             {
-                system("cls");
+                //system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
                 std::cin.get();
                 break;
@@ -275,12 +275,10 @@ void System::selectingOptionsToBetOn(char betOpt, Player & ply)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void System::choicePlayersBetOption()
-{
-    setRandomNumber();
-    
+{    
     for(auto && player : players_)
     {
-        system("cls");
+        //system("cls");
         displayBoard(players_, getNumOfPlayers());
         
         player.displayName();
@@ -306,73 +304,20 @@ void System::choicePlayersBetOption()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void System::convertingBettingAmount()
-{
-    choicePlayersBetOption();
-    
-    for(auto && player : players_)
-    {
-        switch(player.getOptionSwitch())
-        {
-            case 1:
-            {
-                player.addToAccBalance(player.getBetAmount()*10);
-                break;
-            }
-            case 2:
-            {
-                player.addToAccBalance(player.getBetAmount()*2);
-                break;
-            }
-            case 3:
-            {
-                player.addToAccBalance(player.getBetAmount()*5);
-                break;
-            }
-            case 4:
-            {
-                player.addToAccBalance(player.getBetAmount()*7);
-                break;
-            }
-            case 5:
-            {
-                player.addToAccBalance(player.getBetAmount()*2);
-                break;
-            }
-            case 6:
-            {
-                player.addToAccBalance(player.getBetAmount()*5);
-                break;
-            }
-            case 7:
-            {
-                player.addToAccBalance(player.getBetAmount()*7);
-                break;
-            }
-            case 0:
-            {
-                player.addToAccBalance(0);
-            }
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void System::displayOfWinnings(Player & ply, int converter)
 {
     ply.displayName();
-    std::cout<<" - Your winnings are: "<< ply.getBetAmount()*converter << "\n";
+    std::cout<<" - Your winnings are: "<< ply.getBetAmount() * converter << "\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void System::playersDisplayOfWinnings()
 {
-    for (auto &&player : players_)
+    for (auto && player : players_)
     {
-        int option = player.getOptionSwitch();
-        int multiplier = 0;
+        int option{player.getOptionSwitch()};
+        int multiplier{0};
         
         //allocating the correct multiplier of the bet amount
         switch (option)
@@ -385,9 +330,14 @@ void System::playersDisplayOfWinnings()
             case 6: multiplier = 5;  break;
             case 7: multiplier = 7;  break;
             case 0: multiplier = 0;  break;
-            default: std::cerr << "Error!\n"; break; 
+            default: 
+                {
+                    std::cerr << "Error! Invalid option switch value\n"; 
+                    break;
+                } 
         }
         displayOfWinnings(player, multiplier);
+        player.addToAccBalance(player.getBetAmount() * multiplier);
     }
 }    
                 
@@ -397,16 +347,19 @@ void System::displayBetweenRounds(int t)
 {
     for(int i = 1; i <= t; i++)
     {
-        convertingBettingAmount();
-        system("cls");
+        setRandomNumber();
+        choicePlayersBetOption();
+
+        //system("cls");
         std::cout <<"The Number is: "<< getRandNumb() << "\n";
+        std::cin.ignore();
         std::cin.get();
-        std::cin.get(); 
-        system("cls");
+
+       // system("cls");
         
         playersDisplayOfWinnings();
         std::cin.get();
-        system("cls");
+        //system("cls");
     }
 }
 
@@ -487,7 +440,7 @@ bool System::checkingAccBalance(int accountBalance)
 
 void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
 {
-    system("cls");
+    //system("cls");
     Board *brd;
 
         switch(amountPlayers)

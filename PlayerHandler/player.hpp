@@ -15,7 +15,6 @@ class Player
 public:
     Player(const std::string & name,
            int accBalance);
-    
     void setName();                     //sets the player's name
     void displayName() const;                 //displays the player's name
     void setAccBalance(int accBalance); //sets the player's account balance

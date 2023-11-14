@@ -29,5 +29,5 @@ void BoardThree::showBoard(std::vector<Player> & p)
             p[1].show();
     std::cout << std::setw(line.length());
             p[2].show(); 
-            std::cout << "\n\n\n"; 
+            std::cout << "\n\n"; 
 }

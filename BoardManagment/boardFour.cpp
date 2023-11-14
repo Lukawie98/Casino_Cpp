@@ -54,5 +54,5 @@ void BoardFour::showBoard(std::vector<Player> & p)
     p[2].show();
     std::cout << spacesRight2;
     p[3].show();
-    std::cout << "\n\n\n";
+    std::cout << "\n\n";
 }
