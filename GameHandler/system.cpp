@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 #include <algorithm>
+#include <random>
 
 void System::displayRanking()
 {
@@ -457,8 +458,12 @@ void System::playingSetNumbOfTurns()
 
 void System::generateRandNumb()
 {
-    srand(time(0));
-    randomNumb_ = rand()%10+1;
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    
+    //set range to the random number
+    std::uniform_int_distribution<int> distribution(1, 10);
+    randomNumb_ = distribution(generator);
 }
 
 ///////////////////////////////////////////////////////////////////////

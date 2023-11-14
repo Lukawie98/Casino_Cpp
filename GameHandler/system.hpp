@@ -20,10 +20,8 @@ public:
                               , GREATER3 
                               , GREATER5
                               , GREATER7 }; //option to bet
-    void addPlayer(const Player & p); //function that adds a player to a container
     void displayRanking();            //displays ranking of players
-    char getNumOfPlayers();           //gets the number of players
-    void addingPlayersNames();        //adds the players names      
+    char getNumOfPlayers();           //gets the number of players  
     void handlingPlayers(int numOfPlayers); //adds players to the container and allows you to enter their names
     void selectionAccBalance();                //player account balance selection
     void selectionNumOfPlayers();              //selecting number of players       
