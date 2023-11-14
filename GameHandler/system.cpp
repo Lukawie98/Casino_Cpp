@@ -369,51 +369,25 @@ void System::displayOfWinnings(Player & ply, int converter)
 
 void System::playersDisplayOfWinnings()
 {
-    for(auto && player : players_)
+    for (auto &&player : players_)
     {
-        switch(player.getOptionSwitch())
+        int option = player.getOptionSwitch();
+        int multiplier = 0;
+        
+        //allocating the correct multiplier of the bet amount
+        switch (option)
         {
-            case 1:
-            {
-                displayOfWinnings(player, 10);
-                break;
-            }
-            case 2:
-            {
-                displayOfWinnings(player, 2);
-                break;
-            }
-            case 3:
-            {
-                displayOfWinnings(player, 5);
-                break;          
-            }
-            case 4:
-            {
-                displayOfWinnings(player, 7);
-                break;
-            }
-            case 5:
-            {
-                displayOfWinnings(player, 2);
-                break;
-            }
-            case 6:
-            {
-                displayOfWinnings(player, 5);  
-                break;
-            }
-            case 7:
-            {
-                displayOfWinnings(player, 7);
-                break;
-            }
-            case 0:
-            {
-                displayOfWinnings(player, 0);
-                break;
-            }
+            case 1: multiplier = 10; break;
+            case 2: multiplier = 2;  break;
+            case 3: multiplier = 5;  break;
+            case 4: multiplier = 7;  break;
+            case 5: multiplier = 2;  break;
+            case 6: multiplier = 5;  break;
+            case 7: multiplier = 7;  break;
+            case 0: multiplier = 0;  break;
+            default: std::cerr << "Error!\n"; break; 
         }
+        displayOfWinnings(player, multiplier);
     }
 }    
                 
@@ -506,10 +480,7 @@ bool System::checkingAccBalance(int accountBalance)
     {
         return false;
     }
-    else
-    {
-        return true;
-    }
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
