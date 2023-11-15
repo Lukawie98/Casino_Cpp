@@ -20,6 +20,7 @@ public:
                               , GREATER3 
                               , GREATER5
                               , GREATER7 }; //option to bet
+    void clearScreen();               //clearing screen for Windows and Linux
     void displayRanking();            //displays ranking of players
     char getNumOfPlayers();           //gets the number of players  
     void handlingPlayers(int numOfPlayers); //adds players to the container and allows you to enter their names

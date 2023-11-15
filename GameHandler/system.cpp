@@ -8,6 +8,17 @@
 #include <algorithm>
 #include <random>
 
+void System::clearScreen()
+{
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
 void System::displayRanking()
 {
     std::cout<<"The ranking is: \n";
@@ -32,7 +43,6 @@ void System::handlingPlayers(int numOfPlayers)
 
         players_.emplace_back(playerName, 0);
     }
-    //system("cls");
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -67,10 +77,8 @@ void System::selectionNumOfPlayers()
             }
             default:
             {
-               // system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
                 std::cin.get();
-               // system("cls");
                 break;
             }
         }
@@ -127,7 +135,6 @@ void System::selectionAccBalance()
             }
         default:
             {
-                //system("cls");
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
                 std::cin.get();
                 break;
@@ -278,7 +285,6 @@ void System::choicePlayersBetOption()
 {    
     for(auto && player : players_)
     {
-        //system("cls");
         displayBoard(players_, getNumOfPlayers());
         
         player.displayName();
@@ -349,17 +355,16 @@ void System::displayBetweenRounds(int t)
     {
         setRandomNumber();
         choicePlayersBetOption();
-
-        //system("cls");
-        std::cout <<"The Number is: "<< getRandNumb() << "\n";
-        std::cin.ignore();
-        std::cin.get();
-
-       // system("cls");
         
+        clearScreen();
+        std::cout <<"The Number is: "<< getRandNumb() << "\n";
+        
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.get();
+        
+        std::cout << "-------------------------------\n";
         playersDisplayOfWinnings();
         std::cin.get();
-        //system("cls");
     }
 }
 
@@ -414,6 +419,7 @@ void System::checkingWinner()
 {   
     //sort the ranking of winners    
     finalSorting(players_);
+    clearScreen();
     std::cout << "The BIG WINNER IS: \n";
     players_[0].show();
     std::cout <<"\n********************\n\n";
@@ -440,38 +446,37 @@ bool System::checkingAccBalance(int accountBalance)
 
 void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
 {
-    //system("cls");
     Board *brd;
-
-        switch(amountPlayers)
+    clearScreen();
+    switch(amountPlayers)
+    {
+        case '3':
         {
-            case '3':
-            {
-                 BoardThree b3;
-                 brd = &b3;
-                 brd -> showBoard(ply);
-                 break;
-            }
-            case '4':
-            {
-                BoardFour b4;
-                brd = &b4;
+                BoardThree b3;
+                brd = &b3;
                 brd -> showBoard(ply);
                 break;
-            }
-            case '5':
-            {
-                 BoardFive b5;
-                 brd = &b5;
-                 brd -> showBoard(ply);
-                 break;
-            }
-            default:
-            {
-                std::cout<<"Wrong sign, select between 2-5: ";
-                break;
-            } 
         }
+        case '4':
+        {
+            BoardFour b4;
+            brd = &b4;
+            brd -> showBoard(ply);
+            break;
+        }
+        case '5':
+        {
+                BoardFive b5;
+                brd = &b5;
+                brd -> showBoard(ply);
+                break;
+        }
+        default:
+        {
+            std::cout<<"Wrong sign, select between 2-5: ";
+            break;
+        } 
+    }
 }
 
 void System::finalSorting(std::vector<Player> & players)
