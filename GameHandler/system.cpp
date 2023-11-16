@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <algorithm>
 #include <random>
+#include <memory>
 
 void System::clearScreen()
 {
@@ -446,38 +447,36 @@ bool System::checkingAccBalance(int accountBalance)
 
 void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
 {
-    Board *brd;
     clearScreen();
+    std::unique_ptr<Board> brd;
+
     switch(amountPlayers)
     {
         case '3':
         {
-                BoardThree b3;
-                brd = &b3;
-                brd -> showBoard(ply);
-                break;
+            brd = std::make_unique<BoardThree>(); 
+            break;
         }
         case '4':
         {
-            BoardFour b4;
-            brd = &b4;
-            brd -> showBoard(ply);
+            brd = std::make_unique<BoardFour>();
             break;
         }
         case '5':
         {
-                BoardFive b5;
-                brd = &b5;
-                brd -> showBoard(ply);
-                break;
+            brd = std::make_unique<BoardFive>();
+            break;
         }
         default:
         {
-            std::cout<<"Wrong sign, select between 2-5: ";
+            std::cout<<"Wrong sign, select between 3-5: ";
             break;
         } 
     }
+    brd->showBoard(ply);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void System::finalSorting(std::vector<Player> & players)
 {    
