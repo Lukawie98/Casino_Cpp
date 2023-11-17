@@ -23,6 +23,7 @@ The whole project is written in C++ language and uses such libraries as:
 - unistd.h,
 - iomanip,
 - random,
+- memory
 - algorithm.
 
 The integrated development environment(IDE) used was Visual Studio Code.
@@ -37,17 +38,16 @@ The integrated development environment(IDE) used was Visual Studio Code.
 - Const-correctness and unsigned short types are used to prevent unwanted changes and reduce memory usage,
 - References were used, and also references to constants when possible, to avoid creating unnecessary copies,
 - Getter and setter functions have been created to return and set private class data,
-- Used a constructor with an initialization list to improve performance and readability.
+- Used a constructor with an initialization list to improve performance and readability,
+- Used smart pointers to properly manage memory.
 
 ## Project Status
 Project is: _in progress_.
 
 ## Room for Improvement
 This project taught me a lot, such as how to use references and use functions, but at this stage I have a lot of improvements that improve its functioning:
-- dynamic creation of objects using new and delete operators or smart pointers from the memory library,
 - changes in the functions of the board class and making greater use of the polymorphism used,
 - breaking down two functions from system.cpp into smaller and more detailed ones,
-- add unit tests,
 - create a separate class for player management.
 
 Project upcoming extension:
