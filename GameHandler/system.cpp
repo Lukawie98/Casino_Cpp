@@ -23,7 +23,7 @@ void System::clearScreen()
 void System::displayRanking()
 {
     std::cout<<"The ranking is: \n";
-    for(auto player : players_)
+    for(const auto & player : this->players_)
     {
         player.show();
         std::cout<<"\n";
@@ -32,140 +32,116 @@ void System::displayRanking()
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
-void System::handlingPlayers(int numOfPlayers)
+void System::setNumOfPlayers()
 {
-    players_.reserve(numOfPlayers);
-
-    for(int i = 0; i < numOfPlayers; i++)
+    int numOfPlayers = 0;
+    while (!(std::cin >> numOfPlayers)) 
     {
-        std::string playerName{""};
+        std::cout << "Enter the number of players (3-5, 0 to exit): ";
+        if (numOfPlayers < 0 || numOfPlayers > 5) 
+        {
+            std::cout << "!Invalid choice. Please enter 3, 4, or 5 (0 to exit)\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } 
+        else if (numOfPlayers == 0) 
+        {
+            exit(0);
+        } 
+    }        
+    this->numOfPlayers_ = numOfPlayers;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+void System::handlingPlayers()
+{
+    setNumOfPlayers();
+    this->players_.reserve(this->numOfPlayers_);
+    std::string playerName{""};
+    
+    for(int i = 0; i < this->numOfPlayers_; i++)
+    {
         std::cout << "Enter name for player " << i+1 << ": ";
         std::cin >> playerName;
 
-        players_.emplace_back(playerName, 0);
+        this->players_.emplace_back(playerName, 0);
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-void System::selectionNumOfPlayers()
+int System::getNumOfPlayers()
 {
-    std::cin >> numOfPlayers;
-    switch(numOfPlayers)
-        {
-            case '3':
-            {
-                handlingPlayers(3);
-                displayBoard(players_, getNumOfPlayers());
-                break;
-            }
-            case '4':
-            {
-                handlingPlayers(4);
-                displayBoard(players_, getNumOfPlayers());
-                break;
-            }
-            case '5':
-            {
-                handlingPlayers(5);
-                displayBoard(players_, getNumOfPlayers());
-                break;
-            }
-            case '0':
-            {
-                exit(0);
-                break;
-            }
-            default:
-            {
-                std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
-                std::cin.get();
-                break;
-            }
-        }
-        selectionBalanceSystem();
+    return this->numOfPlayers_;
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////   
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-char System::getNumOfPlayers()
+void System::assigingBeginningBalanceToPlayers(int beginningAccBalance)
 {
-    return numOfPlayers;
+    for(auto && player : this->players_)
+    {
+        player.setAccBalance(beginningAccBalance);
+    }  
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 void System::selectionAccBalance()
 {
-    char choiceAmount;
-    std::cin >> choiceAmount;
-    
-    switch(choiceAmount)
+    char choiceAmount{};
+    bool validChoice = false;
+
+    while (!validChoice) 
     {
-        case '1':
-            {
-                for(auto && player : players_)
-                {
-                    player.setAccBalance(500);
-                }
+        std::cin >> choiceAmount;
+        switch(choiceAmount)
+        {
+            case '1': 
+                assigingBeginningBalanceToPlayers(500); 
+                validChoice = true;
                 break;
-            }
-        case '2':
-            {
-                for(auto && player : players_)
-                {
-                    player.setAccBalance(1000);
-                }
+            case '2': 
+                assigingBeginningBalanceToPlayers(1000); 
+                validChoice = true;
                 break;
-            }     
-        case '3':
-            {
-                for(auto && player : players_)
-                {
-                    player.setAccBalance(2000);
-                }
+            case '3': 
+                assigingBeginningBalanceToPlayers(2000); 
+                validChoice = true;
                 break;
-            }
-        case '4':
-            {
-                for(auto && player : players_)
-                {
-                    player.setAccBalance(5000);
-                }
+            case '4': 
+                assigingBeginningBalanceToPlayers(5000); 
+                validChoice = true;
                 break;
-            }
-        default:
-            {
+            default:
                 std::cout << "!Wrong sign, try one more time!\n Press enter to return to menu";
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cin.get();
                 break;
-            }
+        }
     }
-    playingSetNumbOfTurns();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void System::selectionBalanceSystem()
 {
-     while(true)
-    {
-         Menu m1;
-         m1.displayBalanceSelection();
-         selectionAccBalance();
-    }
+    Menu m1;
+    m1.displayBalanceSelection();
+    selectionAccBalance();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 void System::runMenu()
 {
-    while(true)
-    {
-        Menu m1;
-        m1.displayPlayerNumMenu();
-        selectionNumOfPlayers();
-    }
+    Menu m1;
+    m1.displayPlayerNumMenu();
+    handlingPlayers();
+    selectionBalanceSystem();
+    handlingRounds(playingSetNumbOfTurns());
+    checkingWinner();
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -173,12 +149,12 @@ void System::runMenu()
 void System::enterGoldenNumb()
 {
      std::cout << "\nWrite the number: ";
-     std::cin >> betNumber_;
+     std::cin >> this->betNumber_;
      
-     while(betNumber_ < 1 || betNumber_ > 10)
+     while(this->betNumber_ < 1 || this->betNumber_ > 10)
     {
         std::cout << "The number must be between 1 and 10, try again: ";
-        std::cin >> betNumber_;
+        std::cin >> this->betNumber_;
     }
 }
 
@@ -188,95 +164,31 @@ void System::selectingOptionsToBetOn(char betOpt, Player & ply)
 {
     switch(betOpt)
          {
-             case GOLDEN:
-            {
+            case GOLDEN:
                 enterGoldenNumb();
-                
-                if(randomNumb_ == betNumber_)
-                {
-                    ply.setOptionSwitch(1);
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                }
+                ply.setOptionSwitch((this->randomNumb_ == this->betNumber_) ? 1 : 0);
                 break;
-            }
             case LESS7:
-            {
-                if(randomNumb_ < 7)
-                {
-                    ply.setOptionSwitch(2);
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                }
+                ply.setOptionSwitch(this->randomNumb_ < 7 ? 2 : 0);
                 break;
-            }
             case LESS5:
-            {
-                if(randomNumb_ < 5)
-                {
-                    ply.setOptionSwitch(3);
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                }
+                ply.setOptionSwitch(this->randomNumb_ < 5 ? 3 : 0);
                 break;
-            }
             case LESS3:
-            {
-                if(randomNumb_ < 3)
-                {
-                    ply.setOptionSwitch(4);
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                    
-                }
+                ply.setOptionSwitch(this->randomNumb_ < 3 ? 4 : 0);
                 break;
-            }
             case GREATER3:
-            {
-                if(randomNumb_ > 3)
-                {
-                    ply.setOptionSwitch(5) ;
-                    
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                }
+                ply.setOptionSwitch(this->randomNumb_ > 3 ? 5 : 0);
                 break;
-            }
             case GREATER5:
-            {
-                if(randomNumb_ > 5)
-                {
-                   ply.setOptionSwitch(6) ;
-                }
-                else
-                {
-                    ply.setOptionSwitch(0) ;
-                    
-                }
-                break;
-            }
+                ply.setOptionSwitch(this->randomNumb_ > 5 ? 6 : 0);
+                break;        
             case GREATER7:
-            {
-                if(randomNumb_ > 7)
-                {
-                    ply.setOptionSwitch(7);
-                }
-                else
-                {
-                    ply.setOptionSwitch(0);
-                }
+                ply.setOptionSwitch(this->randomNumb_ > 7 ? 7 : 0);
                 break;
-            }
+            default: 
+                std::cerr << "Error! Invalid option switch value\n"; 
+                break;
         }
 }
 
@@ -284,9 +196,9 @@ void System::selectingOptionsToBetOn(char betOpt, Player & ply)
 
 void System::choicePlayersBetOption()
 {    
-    for(auto && player : players_)
+    for(auto && player : this->players_)
     {
-        displayBoard(players_, getNumOfPlayers());
+        displayBoard(this->players_, getNumOfPlayers());
         
         player.displayName();
 
@@ -321,7 +233,7 @@ void System::displayOfWinnings(Player & ply, int converter)
 
 void System::playersDisplayOfWinnings()
 {
-    for (auto && player : players_)
+    for (auto && player : this->players_)
     {
         int option{player.getOptionSwitch()};
         int multiplier{0};
@@ -338,10 +250,8 @@ void System::playersDisplayOfWinnings()
             case 7: multiplier = 7;  break;
             case 0: multiplier = 0;  break;
             default: 
-                {
-                    std::cerr << "Error! Invalid option switch value\n"; 
-                    break;
-                } 
+                std::cerr << "Error! Invalid option switch value\n"; 
+                break;
         }
         displayOfWinnings(player, multiplier);
         player.addToAccBalance(player.getBetAmount() * multiplier);
@@ -350,20 +260,19 @@ void System::playersDisplayOfWinnings()
                 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void System::displayBetweenRounds(int t)
+void System::handlingRounds(int turns)
 {
-    for(int i = 1; i <= t; i++)
+    for(int i = 1; i <= turns; i++)
     {
         setRandomNumber();
         choicePlayersBetOption();
         
         clearScreen();
         std::cout <<"The Number is: "<< getRandNumb() << "\n";
-        
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin.get();
-        
         std::cout << "-------------------------------\n";
+        
         playersDisplayOfWinnings();
         std::cin.get();
     }
@@ -371,7 +280,7 @@ void System::displayBetweenRounds(int t)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void System::playingSetNumbOfTurns()
+int System::playingSetNumbOfTurns()
 {
     int turns;
     std::cout <<"\nWrite how many turns do you want to play(1-10):\n";
@@ -382,9 +291,7 @@ void System::playingSetNumbOfTurns()
         std::cout << "You have to choose 1 - 10\nTry one more time:";
         std::cin >> turns;
     }
-  
-    displayBetweenRounds(turns);
-    checkingWinner();
+    return turns;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -396,14 +303,14 @@ void System::generateRandNumb()
     
     //set range to the random number
     std::uniform_int_distribution<int> distribution(1, 10);
-    randomNumb_ = distribution(generator);
+    this->randomNumb_ = distribution(generator);
 }
 
 ///////////////////////////////////////////////////////////////////////
 
 int System::getRandNumb()
 {
-    return randomNumb_;
+    return this->randomNumb_;
 }
 
 ///////////////////////////////////////////////////////////////////////
@@ -419,10 +326,10 @@ void System::setRandomNumber()
 void System::checkingWinner()
 {   
     //sort the ranking of winners    
-    finalSorting(players_);
+    finalSorting(this->players_);
     clearScreen();
     std::cout << "The BIG WINNER IS: \n";
-    players_[0].show();
+    this->players_[0].show();
     std::cout <<"\n********************\n\n";
     
     displayRanking();
@@ -436,33 +343,29 @@ void System::checkingWinner()
 
 bool System::checkingAccBalance(int accountBalance)
 {
-    if(accountBalance <= 0)
-    {
-        return false;
-    }
-    return true;
+    return accountBalance > 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
-void System::displayBoard(std::vector<Player> & ply, char amountPlayers)
+void System::displayBoard(std::vector<Player> & ply, const int & amountPlayers)
 {
     clearScreen();
     std::unique_ptr<Board> brd;
 
     switch(amountPlayers)
     {
-        case '3':
+        case 3:
         {
             brd = std::make_unique<BoardThree>(); 
             break;
         }
-        case '4':
+        case 4:
         {
             brd = std::make_unique<BoardFour>();
             break;
         }
-        case '5':
+        case 5:
         {
             brd = std::make_unique<BoardFive>();
             break;

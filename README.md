@@ -47,6 +47,7 @@ Project is: _in progress_.
 ## Room for Improvement
 This project taught me a lot, such as how to use references and use functions, but at this stage I have a lot of improvements that improve its functioning:
 - changes in the functions of the board class and making greater use of the polymorphism used,
+- breaking down two functions from system.cpp into smaller and more detailed ones,
 - create a separate class for player management.
 
 Project upcoming extension:

@@ -5,8 +5,8 @@
 
 class Player
 {
-    std::string name_ {""};          //player name
-    int accBalance_{0};    //player's account balance
+    std::string name_ {""};
+    int accBalance_{0};
     unsigned int betNumber_ {0};             //number, which the player bets that it fell out
     int betAmount_ {0};             //the amount the player is betting
     char betOption_ {0};            //option on which the player is betting

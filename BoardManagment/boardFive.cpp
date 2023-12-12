@@ -3,21 +3,21 @@
 void BoardFive::longerName(int fP0, int fP2)
 {
     //if informations about one player are longer, adds as many spaces to the variable as needed
-        if(fP0 > fP2)
+    if(fP0 > fP2)
     {
-         while(fP0 >= 0)
-         {
-             leftSpace += ' ';
-             fP0--;
-         }        
+        while(fP0 >= 0)
+        {
+            leftSpace += ' ';
+            fP0--;
+        }        
     }
     else
     {
-          while(fP2 >= 0)
-         {
-             leftSpace += ' ';
-             fP2--;
-         }
+        while(fP2 >= 0)
+        {
+            leftSpace += ' ';
+            fP2--;
+        }
     }
 }
 

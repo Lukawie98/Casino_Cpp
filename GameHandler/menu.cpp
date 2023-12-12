@@ -8,7 +8,6 @@ void Menu::displayBalanceSelection() const
                   << "2 - Start with $1000\n"
                   << "3 - Start with $2000\n"
                   << "4 - Start with $5000\n"
-                  << "0 - Back To Menu\n"
                   << "Enter: ";
     
 }
